@@ -7,6 +7,13 @@ const WeatherBox = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleCityChange = useCallback((city) => {
     console.log('city', city);
+    fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0cf15504881daaadad4f6ea46cbe2bdb&units=metric`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   });
 
   return (
