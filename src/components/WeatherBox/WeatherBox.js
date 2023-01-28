@@ -1,9 +1,11 @@
 import PickCity from '../PickCity/PickCity';
 import WeatherSummary from '../WeatherSummary/WeatherSummary';
 import Loader from '../Loader/Loader';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 const WeatherBox = (props) => {
+  const [weather, setWeather] = useState('');
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleCityChange = useCallback((city) => {
     console.log('city', city);
@@ -19,13 +21,15 @@ const WeatherBox = (props) => {
           icon: data.weather[0].icon,
           description: data.weather[0].main
         };
+        setWeather(weatherData);
+        console.log('weatherData', weatherData);
       });
   });
 
   return (
     <section>
       <PickCity action={handleCityChange}></PickCity>
-      <WeatherSummary />
+      {weather && <WeatherSummary {...weather} />}
       <Loader />
     </section>
   );
