@@ -13,6 +13,12 @@ const WeatherBox = (props) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        const weatherData = {
+          city: data.name,
+          temp: data.main.temp,
+          icon: data.weather[0].icon,
+          description: data.weather[0].main
+        };
       });
   });
 
